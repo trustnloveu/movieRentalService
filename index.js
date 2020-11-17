@@ -32,7 +32,7 @@ app.use("/api/auth", auth);
 app.use(error);
 
 // winston
-winston.add(winston.transports.File, { filename: "logfile.log" });
+// winston.add(winston.transports.File, { filename: "logfile.log" });
 
 // config
 const config = require("config");
