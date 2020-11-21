@@ -1,7 +1,6 @@
 {
-  "name": "vidly",
+  "name": "movieRentalService",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "dependencies": {
     "app-root-path": "^3.0.0",
@@ -25,5 +24,6 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "description": ""
 }
