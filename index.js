@@ -2,8 +2,10 @@ const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 require("express-async-errors");
-// const winston = require("winston");
+
+// winston (logging)
 require("./middleware/logger");
+require("winston");
 
 // middleware
 const error = require("./middleware/error");
@@ -32,26 +34,6 @@ app.use("/api/auth", auth);
 // error middleware (passing a reference, not calling a function)
 app.use(error);
 
-// winston
-// const logger = winston.createLogger({
-//   level: "info",
-//   format: winston.format.json(),
-//   defaultMeta: { service: "movie-rental-service" },
-//   transports: [
-//     new winston.transports.File({ filename: "logfile.log", level: "error" }),
-//     new winston.transports.File({ filename: "combined.log" }),
-//   ],
-// });
-
-// // `${info.level}: ${info.message} JSON.stringify({ ...rest }) `
-// if (process.env.NODE_ENV !== "production") {
-//   logger.add(
-//     new winston.transports.Console({
-//       format: winston.format.simple(),
-//     })
-//   );
-// }
-
 // config
 const config = require("config");
 if (!config.get("jwtPrivateKey")) {
@@ -61,7 +43,7 @@ if (!config.get("jwtPrivateKey")) {
 
 // connecting to DB(Only once when the propject starts)
 mongoose
-  .connect("mongodb://localhost/vidly", {
+  .connect("mongodb://localhost/movieRentalService", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

@@ -1,5 +1,7 @@
 const winston = require("winston");
+require("winston-mongodb");
 
+// logging on file(.log)
 const logger = winston.createLogger({
   level: "info",
   format: winston.format.json(),
@@ -10,6 +12,7 @@ const logger = winston.createLogger({
   ],
 });
 
+// if it's in production stage, display on console
 // `${info.level}: ${info.message} JSON.stringify({ ...rest }) `
 if (process.env.NODE_ENV !== "production") {
   logger.add(
@@ -20,3 +23,11 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 winston.add(logger);
+
+// logging in DB table(log)
+winston.add(
+  new winston.transports.MongoDB({
+    level: "info",
+    db: "mongodb://localhost/movieRentalService",
+  })
+);

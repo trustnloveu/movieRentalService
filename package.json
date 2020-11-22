@@ -16,14 +16,28 @@
     "lodash": "^4.17.20",
     "mongoose": "^5.10.13",
     "nodemon": "^2.0.6",
-    "winston": "^3.3.3"
+    "winston": "^3.3.3",
+    "winston-mongodb": "^5.0.5"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "Movew",
+    "Rental",
+    "NodeJS",
+    "Server"
+  ],
+  "author": "Euijin Yang",
   "license": "ISC",
-  "description": ""
+  "description": "Movie Rental Service(Back-End Server)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trustnloveu/movieRentalService.git"
+  },
+  "bugs": {
+    "url": "https://github.com/trustnloveu/movieRentalService/issues"
+  },
+  "homepage": "https://github.com/trustnloveu/movieRentalService#readme"
 }
