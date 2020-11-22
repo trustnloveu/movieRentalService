@@ -11,7 +11,7 @@ const { Genre, validate } = require("../models/gerne");
 
 // GET All
 router.get("/", async (req, res) => {
-  throw new Error("Error testing");
+  // throw new Error("Error testing");
   const genres = await Genre.find().sort("name");
   res.send(genres);
 });
