@@ -36,10 +36,10 @@ describe("getCurrencies", () => {
   it("should return supported currencies", () => {
     const result = example.getCurrencies();
     // Proper way > To check for the existance of an element in the array
+    expect(result).toEqual(expect.arrayContaining(["WON", "USD", "EUR"]));
     // expect(result).toContain("WON");
     // expect(result).toContain("USD");
     // expect(result).toContain("EUR");
-    expect(result).toEqual(expect.arrayContaining(["WON", "USD", "EUR"]));
 
     // Too general > Can be out of test range
     // expect(result).toBeDefined();
@@ -51,4 +51,42 @@ describe("getCurrencies", () => {
     // expect(result[2]).toBe("EUR");
     // expect(result.length).toBe(3);
   });
+});
+
+// Testing Objects
+describe("getProduct", () => {
+  it("should return the product with the given id", () => {
+    const result = example.getProduct(1);
+    expect(result).toMatchObject({ id: 1, price: 10 });
+    // expect(result).toHaveProperty("id", 1);
+
+    // Too specific
+    // expect(result).toEqual({ id: 1, price: 10 });
+    // expect(result).toStrictEqual({ id: 1, price: 10 });
+  });
+});
+
+// Testing Exceptions
+describe("registerUser", () => {
+  // falsy check
+  it("should throw if username is falsey", () => {
+    // array of all falsey values
+    const args = [null, undefined, NaN, "", 0, false];
+    // Execute falsy check
+    args.forEach((a) => {
+      expect(() => {
+        example.registerUser(a);
+      }).toThrow();
+    });
+  });
+
+  // time check
+  if (
+    ("should return a user object if passed username is valid",
+    () => {
+      const result = example.registerUser("Austin");
+      expect(result).toMatchObject({ username: "Austin" });
+      expect(result.registTime).toBeGraterThan(0);
+    })
+  );
 });
