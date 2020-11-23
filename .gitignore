@@ -2,3 +2,4 @@ logs/
 main.log
 *.log
 bin/
+node_modules
