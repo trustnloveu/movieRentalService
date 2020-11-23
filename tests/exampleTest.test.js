@@ -1,3 +1,4 @@
+const { boolean } = require("joi");
 const example = require("./example");
 
 // test("My first test", () => {
@@ -74,19 +75,51 @@ describe("registerUser", () => {
     const args = [null, undefined, NaN, "", 0, false];
     // Execute falsy check
     args.forEach((a) => {
-      expect(() => {
+      expect((a) => {
         example.registerUser(a);
       }).toThrow();
     });
   });
 
   // time check
-  if (
-    ("should return a user object if passed username is valid",
-    () => {
-      const result = example.registerUser("Austin");
-      expect(result).toMatchObject({ username: "Austin" });
-      expect(result.registTime).toBeGraterThan(0);
-    })
-  );
+  it("should return a user object if passed username is valid", () => {
+    const result = example.registerUser("Austin");
+    expect(result).toMatchObject({ username: "Austin" });
+    expect(result.registTime).toBeGreaterThan(0);
+  });
+});
+
+// FizzBuzz Exercise
+describe("fizzBuzz", () => {
+  // Not a number
+  it("should throw an exception if input is not a number", () => {
+    const args = [null, undefined, "abc", {}];
+    args.forEach((a) => {
+      expect((a) => example.fizzBuzz(a)).toThrow();
+    });
+  });
+
+  // FizzBuzz < multiple of 3 and 5
+  it("should return FizzBuzz if input is divisible by 3 and 5", () => {
+    const result = example.fizzBuzz(15);
+    expect(result).toEqual("FizzBuzz");
+  });
+
+  // Fizz < multiple of 3
+  it("should return Fizz if input is only divisible by 3", () => {
+    const result = example.fizzBuzz(3);
+    expect(result).toEqual("Fizz");
+  });
+
+  // Buzz < multiple of 5
+  it("should return Buzz if input is only divisible by 5", () => {
+    const result = example.fizzBuzz(5);
+    expect(result).toBe("Buzz");
+  });
+
+  // Neither mutiple 3 or 5
+  it("should return input if it's not divisible by 3 or 5", () => {
+    const result = example.fizzBuzz(2);
+    expect(result).toBe(2);
+  });
 });
