@@ -48,3 +48,12 @@ module.exports.applyDiscount = function (order) {
 
   if (customer.points > 10) order.totalPrice *= 0.9;
 };
+
+const mail = require("./mail");
+
+// Testing Interaction
+module.exports.notifyCustomer = function (order) {
+  const customer = testDb.getCustomerSync(order.customerId);
+
+  mail.send(customer.email, "Your order was placed successfully.");
+};

@@ -1,5 +1,6 @@
 const example = require("./example");
 const testDb = require("./testDb");
+const mail = require("./mail");
 
 // test("My first test", () => {
 //   throw new Error("Something failed.");
@@ -135,5 +136,24 @@ describe("applyDiscount", () => {
     const order = { customerId: 1, totalPrice: 10 };
     example.applyDiscount(order);
     expect(order.totalPrice).toBe(9);
+  });
+});
+
+// Testing Interaction
+describe("notifyCustomer", () => {
+  it("should send an email to the customer.", () => {
+    testDb.getCustomerSync = function (customerId) {
+      console.log("Fake sending an email...");
+      return { email: "test@email.com" };
+    };
+
+    let mailSent = false;
+    mail.send = function (email, message) {
+      mailSent = true;
+    };
+
+    example.notifyCustomer({ customerId: 1 });
+
+    expect(mailSent).toBe(true);
   });
 });
