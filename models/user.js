@@ -3,7 +3,6 @@ const Joi = require("joi");
 
 const jwt = require("jsonwebtoken");
 const config = require("config");
-const { boolean } = require("joi");
 
 // modeling & schema
 mongoose.set("useCreateIndex", true);
