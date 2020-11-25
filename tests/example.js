@@ -39,3 +39,12 @@ module.exports.fizzBuzz = function (input) {
 
   return input;
 };
+
+const testDb = require("./testDb");
+
+// Mock(Fake) Funtions
+module.exports.applyDiscount = function (order) {
+  const customer = testDb.getCustomerSync(order.customerId);
+
+  if (customer.points > 10) order.totalPrice *= 0.9;
+};

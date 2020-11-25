@@ -1,5 +1,5 @@
-const { boolean } = require("joi");
 const example = require("./example");
+const testDb = require("./testDb");
 
 // test("My first test", () => {
 //   throw new Error("Something failed.");
@@ -121,5 +121,19 @@ describe("fizzBuzz", () => {
   it("should return input if it's not divisible by 3 or 5", () => {
     const result = example.fizzBuzz(2);
     expect(result).toBe(2);
+  });
+});
+
+// Testing Mock(Fake) Functions
+describe("applyDiscount", () => {
+  it("should apply 10% discount if customer has more than 10 points.", () => {
+    testDb.getCustomerSync = function (customerId) {
+      console.log("Fake reading customer...");
+      return { id: customerId, points: 20 };
+    };
+
+    const order = { customerId: 1, totalPrice: 10 };
+    example.applyDiscount(order);
+    expect(order.totalPrice).toBe(9);
   });
 });
