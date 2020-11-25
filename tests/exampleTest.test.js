@@ -142,18 +142,43 @@ describe("applyDiscount", () => {
 // Testing Interaction
 describe("notifyCustomer", () => {
   it("should send an email to the customer.", () => {
-    testDb.getCustomerSync = function (customerId) {
-      console.log("Fake sending an email...");
-      return { email: "test@email.com" };
-    };
+    // Example of Mock Fuinction using Jest
+    // const mockFunction = jest.fn();
+    // mockFunction.mockReturnValue(1);
+    // mockFunction.mockResolvedValue(1);
+    // mockFunction.mockRejectedValue(new Error("Error Message..."));
+    // const result = await mockFunction();
 
-    let mailSent = false;
-    mail.send = function (email, message) {
-      mailSent = true;
-    };
+    testDb.getCustomerSync = jest
+      .fn()
+      .mockReturnValue({ email: "test@email.com" });
+
+    mail.send = jest.fn();
+
+    // testDb.getCustomerSync = function (customerId) {
+    //   console.log("Fake sending an email...");
+    //   return { email: "test@email.com" };
+    // };
+
+    // let mailSent = false;
+    // mail.send = function (email, message) {
+    //   mailSent = true;
+    // };
 
     example.notifyCustomer({ customerId: 1 });
 
-    expect(mailSent).toBe(true);
+    // expect(mailSent).toBe(true);
+    expect(mail.send).toHaveBeenCalled();
+
+    // You'd rather put Number or Boolean instead of String
+    // expect(mail.send).toHaveBeenCalledWith(
+    //   "test@email.com",
+    //   "Your order was placed successfully."
+    // );
+
+    // mock > called array > returned array (ex. 1st = email, 2nd = message)
+    expect(mail.send.mock.calls[0][0]).toBe("test@email.com");
+    // including "order" in the message
+    expect(mail.send.mock.calls[0][1]).toMatch(/order/);
   });
 });
