@@ -1,6 +1,5 @@
 {
     "jwtPrivateKey": "movie_jwtPrivateKey",
     "db": "mongodb://localhost/movieRentalService",
-    "port": "3000",
-    "requiresAuth": true
+    "requiresAuth": false
 }
