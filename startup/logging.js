@@ -15,7 +15,8 @@ const logger = winston.createLogger({
   format: winston.format.combine(
     winston.format.json(),
     winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
-    winston.format.colorize(),
+    winston.format.colorize({ all: true }),
+    winston.format.align(),
     winston.format.prettyPrint()
   ),
   // meta

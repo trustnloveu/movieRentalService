@@ -3,6 +3,7 @@ const config = require("config");
 
 module.exports = function (winston) {
   const db = config.get("db");
+  console.log(db);
   // connecting to DB(Only once when the propject starts)
   // "mongodb://localhost/movieRentalService"
   mongoose
