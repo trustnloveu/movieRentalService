@@ -1,5 +1,5 @@
 {
     "jwtPrivateKey": "movie_jwtPrivateKey",
     "db": "mongodb://localhost/movieRentalService",
-    "requiresAuth": false
+    "requiresAuth": true
 }
