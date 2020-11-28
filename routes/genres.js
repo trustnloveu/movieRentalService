@@ -4,6 +4,7 @@ const router = express.Router();
 // Middleware(Authentication, Authorization, async)
 const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
+const validateObjectId = require("../middleware/validateObjectId");
 // const asyncMiddleware = require("../middleware/async");
 
 // Modeling & Defining Schema
@@ -13,14 +14,16 @@ const { Genre, validate } = require("../models/gerne");
 router.get("/", async (req, res) => {
   // throw new Error("Error testing");
   const genres = await Genre.find().sort("name");
+
   res.send(genres);
 });
 
 // GET Single
-router.get("/:id", async (req, res) => {
+router.get("/:id", validateObjectId, async (req, res) => {
   const genre = await Genre.findById(req.params.id);
   if (!genre)
     return res.status(404).send("The genre with the given ID was not found.");
+
   res.send(genre);
 });
 
