@@ -1,5 +1,3 @@
-const { iteratee } = require("lodash");
-
 const { User } = require("../../../models/user");
 const auth = require("../../../middleware/auth");
 const mongoose = require("mongoose");
