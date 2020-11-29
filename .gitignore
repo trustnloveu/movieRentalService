@@ -1,5 +1,12 @@
+#binary
+bin/
+# modules
+node_modules/
+
+# logs
 logs/
 main.log
 *.log
-bin/
-node_modules/
+
+# coverage
+coverage/
