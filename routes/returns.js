@@ -3,17 +3,24 @@ const router = express.Router();
 const moment = require("moment");
 const Joi = require("joi");
 
+// class
 const { Rental } = require("../models/rental");
 const { Movie } = require("../models/movie");
 
 // middleware
 const auth = require("../middleware/auth");
-const { join } = require("lodash");
+const validate = (validator) => {
+  return (req, res, next) => {
+    const { error } = validator(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+    next();
+  };
+};
 
-router.post("/", auth, async (req, res) => {
+router.post("/", [auth, validate(validateReturn)], async (req, res) => {
   // no customer id
-  if (!req.body.customerId)
-    return res.status(400).send("customeId is not provided.");
+  //   if (!req.body.customerId)
+  //     return res.status(400).send("customeId is not provided.");
 
   // no movie id
   if (!req.body.movieId)
@@ -52,10 +59,10 @@ router.post("/", auth, async (req, res) => {
 });
 
 function validateReturn(rental) {
-  const schema = {
-    customerId: Joi.objectID().required(),
-    movieId: Joi.objectID().required(),
-  };
+  const schema = Joi.object({
+    customerId: Joi.objectId().required(),
+    movieId: Joi.objectId().required(),
+  });
 
   return schema.validate(rental);
 }
