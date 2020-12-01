@@ -5,6 +5,7 @@ const customers = require("../routes/customers");
 const rentals = require("../routes/rentals");
 const users = require("../routes/users");
 const auth = require("../routes/auth");
+const returns = require("../routes/returns");
 
 // middleware
 const error = require("../middleware/error");
@@ -18,6 +19,7 @@ module.exports = function (app, express) {
   app.use("/api/rentals", rentals);
   app.use("/api/users", users);
   app.use("/api/auth", auth);
+  app.use("/api/returns", returns);
   // error middleware (passing a reference, not calling a function)
   app.use(error);
 };
